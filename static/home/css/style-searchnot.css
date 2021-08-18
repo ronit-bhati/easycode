@@ -1,0 +1,13 @@
+body{
+    background-color: whitesmoke;
+}
+
+body .container-fluid{
+    height: 73vh;
+    width: 96.5vw;
+    background-color: white;
+}
+
+.search-head{
+    font-weight: 600;
+}

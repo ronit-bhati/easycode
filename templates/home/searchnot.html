@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css-loc %}
+<link rel="stylesheet" href="{% static 'home/css/style-searchnot.css' %}"> {% endblock %}
+{% block title %}Search Result for "{{query}}"{% endblock title %}
+{% block blogactive %} active {% endblock blogactive %}
+
+{% block body %}
+<div class="container">
+    <h2 class="search-head mt-3">Search results for "{{query|slice:":45"}}{% if query|length >= 45 %}...{% endif %}"</h2>
+</div>
+<div class="container-fluid mx-4 my-4 d-flex align-items-center justify-content-center flex-column">
+    <p class="d-flex justify-content-center"><img class="success-image" src="{% static 'home/images/noresult.png' %}">
+    </p>
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Oops!</h4>
+        <p>We found nothing related to your search. Make sure that you entered the right name for blog you are searching for or search something else.</p>
+        <hr>
+        <p class="mb-0">No search result found. <a href="/blog">Go back</a></p>
+    </div>
+</div>
+{% endblock body %}

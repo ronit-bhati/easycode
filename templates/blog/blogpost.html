@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load extras %}
+{% load static %}
+{% block css-loc %}
+<link rel="stylesheet" href="{% static 'blog/css/style-blogpost.css' %}"> {% endblock %}
+{% block title %}{{post.title}}{% endblock title %}
+{% block blogactive %} active {% endblock blogactive %}
+
+{% block body %}
+<div class="container my-4">
+    <h2 class="blog-post-title font-weight-bold">{{post.title}}</h2>
+    <p class="blog-post-meta">{{post.timeStamp}} by <a href="/about">{{post.author}}</a><img class="ml-2" src="{% static 'blog/images/eye.svg' %}" alt="user"><span class="badge badge-success badge-dark ml-2"> {{post.views}} views</span></p>
+    <p class="blog-content">{{post.content|safe}}</p>
+    <hr>
+</div>
+<div class="container mb-4">
+    <div class="my-2">
+        {% if user.is_authenticated %}
+        <form action="/blog/postComment" method="POST"> {% csrf_token %}
+            <input type="hidden" name="postSno" value="{{post.sno}}">
+            <input type="hidden" name="parentSno" value="">
+            <div class="form-group">
+                <h2 class="demi-bold"><label for="textArea">Post a Comment</label></h2>
+                <textarea maxlength="1200" class="form-control" name="comment" placeholder="Enter Your Comment Here"
+                    id="comment" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Post</button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning demi-bold" role="alert">
+            Please Login to Post A Comment!
+        </div>
+        {% endif %}
+    </div>
+
+
+    <h2 class="my-3 demi-bold mt-4">Comments ({{comments.count}})</h2>
+    {% for comment in comments %}
+    <div class="row bg-light border-bottom mx-2">
+        <div class="col-md-1 my-3"><img class="w-100" src="{% static 'blog/images/user.svg' %}" alt="user"></div>
+        <div class="col-md-11 my-3">
+            <b> {{comment.user.username}} </b> <span
+                class="badge badge-pill badge-warning">{{comment.timestamp|naturaltime}}</span>
+            <div>
+                {{comment.comment}}
+            </div>
+            <div class="reply">
+                <button class="btn btn-outline-dark btn-sm mt-2" type="button" data-toggle="collapse"
+                    data-target="#replybox{{comment.sno}}" aria-expanded="false"
+                    aria-controls="replybox{{comment.sno}}">
+                    Reply
+                </button>
+                <div class="collapse" id="replybox{{comment.sno}}">
+                    {% if user.is_authenticated %}
+                    <form action="/blog/postComment" method="POST"> {% csrf_token %}
+                        <input type="hidden" name="postSno" value="{{post.sno}}">
+                        <div class="form-group mt-3">
+                            <textarea maxlength="1200" class="form-control" name="comment"
+                                placeholder="Enter Your Reply To The Above Comment Here" id="comment"
+                                rows="3"></textarea>
+                        </div>
+                        <input type="hidden" name="parentSno" value="{{comment.sno}}">
+                        <button type="submit" class="btn btn-warning">Add Reply</button>
+                    </form>
+                    {% else %}
+                    <div class="alert alert-warning demi-bold mt-3" role="alert">
+                        Please Login to Add A Reply To This Comment!
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="replies border-dark border-left mt-2">
+                    {% for comment in repDict|get_val:comment.sno %}
+                    <div class="row bg-light mx-2">
+                        <div class="col-md-1 my-3"><img class="w-100 p-1" src="{% static 'blog/images/user.svg' %}"
+                                alt="user"></div>
+                        <div class="col-md-11 my-3">
+                            Reply from <b> {{comment.user.username}} </b> <span
+                                class="badge badge-pill badge-warning">{{comment.timestamp|naturaltime}}</span>
+                            <div>
+                                {{comment.comment}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}

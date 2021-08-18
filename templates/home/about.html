@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css-loc %}
+<link rel="stylesheet" href="{% static 'home/css/style-about.css' %}"> {% endblock %}
+{% block title %}About Us{% endblock title %}
+
+{% block aboutactive %} active {% endblock %}
+
+{% block body %}
+	<main role="main">
+		
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="container">
+				<h1 class="display-3 font-weight-bold">EasyCode</h1>
+				<p>This is a blog made by <a href="https://www.instagram.com/ronit_bhati_/" target="_blank">Ronit</a> in Django. This blog only contains posts related to Django. This blog is designed with the help of Bootstrap as front-end framework. The backend is written completely with Python's Django framework which is very efficient and good in making websites. This blog is deployed on Heroku cloud service as a free app. If you have any problem related to the content or copyrights you can <a href="/contact">Contact Us!</a> We will revert back as soon as possoble.</p>
+			</div>
+		</div>
+		
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="col-md-4">
+					<h2 class="font-weight-bold">Django</h2>
+					<p>Django is a high-level Python web framework that enables rapid development of secure and maintainable websites. Built by experienced developers, Django takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It is free and open source, has a thriving and active community, great documentation, and many options for free and paid-for support.</p>
+				</div>
+				<div class="col-md-4">
+					<h2 class="font-weight-bold">Bootstrap</h2>
+					<p>Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development. It contains CSS- and (optionally) JavaScript-based design templates for typography, forms, buttons, navigation, and other interface components. </p>
+				</div>
+				<div class="col-md-4">
+					<h2 class="font-weight-bold">Heroku</h2>
+					<p>Heroku is a cloud platform as a service (PaaS) supporting several programming languages. One of the first cloud platforms, Heroku has been in development since June 2007, when it supported only the Ruby programming language, but now supports Java, Node.js, Scala, Clojure, Python, PHP, and Go.</p>
+				</div>
+			</div>
+			
+			<hr>
+			
+			</div> <!-- /container -->
+			
+		</main>
+{% endblock body %}

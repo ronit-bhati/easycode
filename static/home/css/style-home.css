@@ -1,0 +1,12 @@
+.popular-blogposts-head{
+    font-weight: 600;
+}
+
+.bd-placeholder-img{
+	width: 325px;
+    height: 301px;
+}
+
+.jumbotron{
+    background-size: cover;
+}

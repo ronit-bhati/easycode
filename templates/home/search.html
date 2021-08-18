@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css-loc %}
+<link rel="stylesheet" href="{% static 'home/css/style-search.css' %}"> {% endblock %}
+{% block title %}Search results for "{{query}}"{% endblock title %}
+
+{% block blogactive %} active {% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <h2 class="coding-articles-heading">Search results for "{{query}}"</h2>
+
+    {% for post in allPosts %}
+
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Author: {{post.author}}</strong>
+            <h3 class="mb-0">{{post.title}}</h3>
+            <div class="mb-1 text-muted">{{post.timeStamp}}</div>
+            <p class="card-text mb-auto">{{post.content|truncatechars:350}}</p>
+            <div>
+                <a href="/blog/{{post.slug}}" role="button" class="mt-3 btn btn-warning">Continue reading</a>
+            </div>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="/media/{{post.thumbnail}}" class="bd-placeholder-img" aria-label="Placeholder: Thumbnail">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock body %}

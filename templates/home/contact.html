@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css-loc %}
+<link rel="stylesheet" href="{% static 'home/css/style-contact.css' %}"> {% endblock %}
+{% block title %}Contact Us{% endblock title %}
+
+{% block contactactive %} active {% endblock %}
+
+{% block body %}
+<div class="container my-4">
+  <h2 class="font-weight-bold">Contact Us</h2>
+  <form action="/contact" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="name" class="form-control" id="name" name="name" placeholder="Enter your Name"
+        aria-describedby="name">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email Address"
+        aria-describedby="email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="phone">Contact no.</label>
+      <input type="phone" class="form-control" name="phone" placeholder="Enter your Contact no." id="phone">
+    </div>
+    <div class="form-group">
+      <label for="phone">How may we help you?</label>
+      <textarea class="form-control" name="content" placeholder="Describe your issue" id="content" cols="30"
+        rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-warning">Submit</button>
+  </form>
+</div>
+{% endblock body %}
