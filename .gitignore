@@ -1,5 +1,7 @@
 /blog/__pycache__
+/blog/migrations/__pycache__
 /blog/templatetags/__pycache__
 /home/__pycache__
+/home/migrations/__pycache__
 EasyCodeENV/
 EasyCode/__pycache__
